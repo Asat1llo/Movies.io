@@ -1,0 +1,6 @@
+export {default as HeroContent} from './hero-content'
+export {default as InnerCard} from './inner-card'
+export {default as Rating} from './rating'
+export {default as MovieSlider} from './slider'
+export {default as Selector} from './select'
+export {default as HMenu} from './h-menu'
