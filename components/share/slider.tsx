@@ -9,8 +9,9 @@ import 'swiper/css/mousewheel';
 import Link from 'next/link';
 import { useCountStore } from '@/lib/store';
 import { MovieSliderProps } from '@/types/props';
+import { Button } from '../ui/button';
 
-const MovieSlider = ({ data, time,className }: MovieSliderProps) => {
+const MovieSlider = ({ data, time,scroll,className }: MovieSliderProps) => {
   const { fetchData, count, newDailys } = useCountStore((state) => state);
 
   const [activeButton, setActiveButton] = useState<number | null>(null);
@@ -23,17 +24,17 @@ const MovieSlider = ({ data, time,className }: MovieSliderProps) => {
   }, [data, count]);
 
   // Handle click on a movie item
-  const handleClick = (index: number, id: string) => {
-    setActiveButton(index); 
-    fetchData?.(id); 
+  const handleClick = (index: number | null, id?: string) => {
+    setActiveButton(index);
+    if (id) fetchData?.(id);
   };
-
+  
   return (
     <Swiper
       modules={[Autoplay, Mousewheel, FreeMode]}
       freeMode={true}
       mousewheel={{
-        forceToAxis: true,
+        forceToAxis: scroll,
         sensitivity: 0.7,
       }}
       spaceBetween={10}
@@ -44,10 +45,14 @@ const MovieSlider = ({ data, time,className }: MovieSliderProps) => {
         768: { slidesPerView: 2 },
         1024: { slidesPerView: 3 },
       }}
-      autoplay={{
-        delay: time,
-        disableOnInteraction: false,
-      }}
+      {...(time > 0
+        ? {
+            autoplay: {
+              delay: time,
+              disableOnInteraction: false,
+            },
+          }
+        : {})} 
       loop
       loopAdditionalSlides={3}
       className="w-full"
@@ -59,10 +64,12 @@ const MovieSlider = ({ data, time,className }: MovieSliderProps) => {
           <SwiperSlide
             key={movie.id}
             {...(delay ? { 'data-swiper-autoplay': delay } : {})}
+            className='cursor-pointer'
           >
             <div
               className={`relative ${className}`}
-              onMouseEnter={() => handleClick(index, movie.id)}
+              onClick={() => handleClick(index, movie.id)}
+              onMouseLeave={()=>handleClick(null)}
             >
               {/* Movie Poster */}
               <img
@@ -75,13 +82,13 @@ const MovieSlider = ({ data, time,className }: MovieSliderProps) => {
               {activeButton === index && (
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center space-x-4 transition-all duration-500 ease-in-out">
                   <Link href={`/movie/${movie.id}`}>
-                    <button className="px-4 py-2 bg-yellow-500 text-black text-sm rounded-md font-semibold hover:bg-yellow-600 transition duration-300 cursor-pointer">
+                    <Button className="px-4 py-2 bg-yellow-500 text-black text-sm rounded-md font-semibold hover:bg-yellow-600 transition duration-300 cursor-pointer">
                       ▶ Watch
-                    </button>
+                    </Button>
                   </Link>
-                  <button className="px-4 py-2 bg-white/20 backdrop-blur text-white text-sm rounded-md font-semibold hover:bg-white/30 transition duration-300 cursor-pointer">
+                  <Button className="px-4 py-2 bg-white/20 backdrop-blur text-white text-sm rounded-md font-semibold hover:bg-white/30 transition duration-300 cursor-pointer">
                     ❤️ Add to Favorites
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>

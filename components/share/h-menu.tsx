@@ -12,6 +12,7 @@ import {
 import { Button } from '../ui/button'
 import localFont from 'next/font/local'
 import Searchmenu from './search'
+import { DrawerDemo } from './drawer'
 
 
 const regular = localFont({
@@ -23,7 +24,7 @@ const HMenu = () => {
     <div>
         {/* Desktop Navigation */}
         <div className="hidden xl:flex justify-between items-center py-4 px-8 gap-1.5">
-           <Searchmenu/>
+           <DrawerDemo/>
           <div className="flex gap-6">
             <Button className={`${regular.className} text-[#5A7AD0] text-lg cursor-pointer hover:underline`}>
               Sign In

@@ -26,7 +26,8 @@ export type Props = {
   export interface MovieSliderProps {
     data: Movie[];
     className:string;
-    time:number
+    time:number;
+    scroll:boolean;
   }
   
 export interface NewData {
@@ -44,9 +45,11 @@ export interface State {
     newDailys: number[];
     newData: NewData[];
     sort:NewData[];
+    filterData:NewData[];
     addId: string;
     loading: boolean;
     error: string | null;
     count: (data: any[]) => void;
     fetchData: (id: string) =>void;
+    filter:(val:string)=>void
   }

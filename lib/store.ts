@@ -1,8 +1,13 @@
-import {create} from 'zustand'
+import { create } from 'zustand';
 import { supabase } from './supabaseClient';
-import { Fetch, State, } from '@/types/props';
+import { Fetch, State } from '@/types/props';
 
+// Helper function for error throwing
+const throwErrorIfAny = (error: any, message = "Unknown error") => {
+  if (error) throw new Error(error.message || message);
+};
 
+// ========== useFetch Store ==========
 export const useFetch = create<Fetch>((set) => ({
   data: [],
   loading: false,
@@ -10,66 +15,84 @@ export const useFetch = create<Fetch>((set) => ({
   filtredTop: [],
   filtredPas: [],
 
-  fetch: async (ger) => {
-    set({ loading: true, error: null }); // Boshlashda error reset qilinadi
-  
+  fetch: async (genre) => {
+    set({ loading: true, error: null });
+
     try {
-      const { data, error } = await supabase
-        .from('movie')
-        .select('*');
-  
-      if (error) throw new Error(error.message);
-      if (!data) throw new Error('No data received from Supabase.');
-  
-      if (!ger || ger === 'All') {
-        const filtredPas = data.filter((item) => item.rating <= 7);
-        const filtredTop = data.filter((item) => item.rating >= 7);
-        set({ data, filtredPas, filtredTop });
-        return;
+      const { data, error } = await supabase.from('movie').select('*');
+      throwErrorIfAny(error, 'Failed to fetch movies');
+
+      if (!data) throw new Error('No data received.');
+
+      let filtredPas = data.filter((item) => item.rating < 7);
+      let filtredTop = data.filter((item) => item.rating >= 7);
+
+      if (genre && genre !== 'All') {
+        const filteredData = data.filter((item) =>
+          item.genres?.split(',').map((g: string) => g.trim()).includes(genre)
+        );
+        
+        filtredPas = filteredData.filter((item) => item.rating < 7);
+        filtredTop = filteredData.filter((item) => item.rating >= 7);
       }
-  
-      const filteredData = data.filter((item) => {
-        const genres = item.genres?.split(',').map((str: string) => str.trim()) || [];
-        return genres.includes(ger);
-      });
-  
-      const dataToUse = filteredData.length ? filteredData : data;
-  
-      const top = dataToUse.filter((item) => item.rating >= 7);
-      const pas = dataToUse.filter((item) => item.rating < 7);
-  
-      set({ data, filtredPas: pas, filtredTop: top });
-  
+
+      set({ data, filtredPas, filtredTop });
     } catch (err: any) {
-      set({ error: err.message }); // ❗ data va filtredlarni tozalama ❗
+      set({ error: err.message });
     } finally {
-      set({ loading: false }); // loading har holda false bo'lishi kerak
+      set({ loading: false });
     }
   }
-  
 }));
 
+// ========== useCountStore ==========
+export const useCountStore = create<State>((set) => ({
+  newDailys: [],
+  newData: [],
+  sort: [],
+  addId: '',
+  filterData: [],
+  loading: false,
+  error: null,
 
+  count: (data) => {
+    const randomTimes = data.map(() => Math.floor(Math.random() * (3000 - 800) + 800));
+    set({ newDailys: randomTimes });
+  },
 
-  export const useCountStore = create<State>((set) => ({
-    newDailys: [],
-    newData: [],
-    sort:[],
-    addId: '',
-    loading: false,
-    error: null,
-    count: (data) => {
-      const newTime = data.map(() => Math.floor(Math.random() * 3000) + 8000);
-      set({ newDailys: newTime });
-    },
-    fetchData: async (id) => {
-      set({ loading: true });
-      const { data, error } = await supabase
-        .from("movie")
-        .select("*")
-        .eq("id", id)
-        .single();
-        error ? set({ error: error.message }) :set({ newData: data })
-      set({ loading: false }); 
-    }    
-  }));
+  fetchData: async (id) => {
+    set({ loading: true, error: null });
+
+    try {
+      const { data, error } = await supabase.from("movie").select("*").eq("id", id).single();
+      throwErrorIfAny(error, 'Failed to fetch movie by ID');
+
+      if (data) set({ newData: data });
+    } catch (err: any) {
+      set({ error: err.message });
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  filter: async (value) => {
+    set({ loading: true, error: null });
+
+    try {
+      const { data, error } = await supabase.from("movie").select("*");
+      throwErrorIfAny(error, 'Failed to fetch movies for filtering');
+
+      const searchValue = value?.trim().toLowerCase();
+
+      const filteredData = searchValue
+        ? data?.filter((item) => item.title.toLowerCase().includes(searchValue))
+        : data;
+
+      set({ filterData: filteredData || [] });
+    } catch (err: any) {
+      set({ error: err.message });
+    } finally {
+      set({ loading: false });
+    }
+  }
+}));
