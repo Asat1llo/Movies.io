@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/menubar"
 import { Button } from '../ui/button'
 import localFont from 'next/font/local'
-import Searchmenu from './search'
 import { DrawerDemo } from './drawer'
 
 

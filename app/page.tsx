@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Hero from "./hero";
 import MovieContents from "./movie/movieContents";
 

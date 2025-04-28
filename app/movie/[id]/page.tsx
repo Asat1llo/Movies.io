@@ -1,7 +1,5 @@
 'use client';
-
 import React, { useEffect,use } from 'react';
-import { Play, Download, Star, Bookmark, Eye, Twitter, Facebook } from 'lucide-react';
 import { useCountStore } from '@/lib/store';
 import { InnerCard } from '@/components/share';
 import InnerDetails from '@/components/share/inner-details';
