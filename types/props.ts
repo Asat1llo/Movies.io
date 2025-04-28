@@ -16,8 +16,7 @@ export type Props = {
     error: string | null;
     filtredTop: Movie[];
     filtredPas: Movie[];
-    fetch: () => void;
-    filter: (data: Movie[]) => void;
+    fetch: (ger:string) => void;
   };
   
   export type HandleChange = {
@@ -27,6 +26,7 @@ export type Props = {
   export interface MovieSliderProps {
     data: Movie[];
     className:string;
+    time:number
   }
   
 export interface NewData {
@@ -43,6 +43,7 @@ export interface NewData {
 export interface State {
     newDailys: number[];
     newData: NewData[];
+    sort:NewData[];
     addId: string;
     loading: boolean;
     error: string | null;

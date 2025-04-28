@@ -7,6 +7,7 @@ import { Button } from '../ui/button'
 const InnerDetails = () => {
 
     const {newData} = useCountStore((state)=>state)
+    const dataTime = newData.time?.toString().split('.').map((str: string) => Number(str.trim())) || [];
 
   return (
     <section className="md:col-span-2 flex flex-col justify-start space-y-6">
@@ -43,7 +44,7 @@ const InnerDetails = () => {
       </div>
       <div>
         <dt className="text-[#2A3B5A] mb-1">Genres</dt>
-        <dd className="font-semibold italic">Adventure, Fantasy</dd>
+        <dd className="font-semibold italic">{newData?.genres || Default.geners}</dd>
       </div>
       <div>
         <dt className="text-[#2A3B5A] mb-1">Countries</dt>
@@ -51,7 +52,7 @@ const InnerDetails = () => {
       </div>
       <div>
         <dt className="text-[#2A3B5A] mb-1">Duration</dt>
-        <dd className="font-semibold">2 hours +</dd>
+        <dd className="font-semibold">{dataTime[0] || Default.time[0]}hours +{dataTime[1] || Default.time[1]}</dd>
       </div>
     </dl>
 

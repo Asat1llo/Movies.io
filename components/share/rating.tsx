@@ -6,7 +6,6 @@ import { Props } from '@/types/props'
 
 const Rating  =({rating}:Props) => {
   const fullStars = Math.round(rating);
-  console.log(fullStars)
   return (
     <>
     {

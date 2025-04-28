@@ -1,47 +1,57 @@
-"use client"
+"use client";
 
-import { useFetch } from '@/lib/store'
-import React, { useEffect } from 'react'
-import localFont from "next/font/local"
-import { MovieSlider } from '@/components/share'
-
+import { useFetch } from '@/lib/store';
+import { useEffect } from 'react';
+import localFont from "next/font/local";
+import { Loader, MovieSlider } from '@/components/share';
 
 const bold = localFont({
-  src:'../../public/fonts/Roboto-Bold.woff2'
-})
-
+  src: '../../public/fonts/Roboto-Bold.woff2', 
+});
 
 const MovieContents = () => {
+  const { fetch, filtredTop, filtredPas,error,loading } = useFetch((state) => state);
 
-    const {loading,error,fetch,data,filter,filtredTop,filtredPas} = useFetch((state)=>state)
+  useEffect(() => {
+    const ger = "All"
+    fetch(ger); 
+  }, [fetch]);
 
-    useEffect(() => {
-      const getData = async () => {
-        await fetch();
-      };
-      getData();
-    }, [fetch]);
-  
-    useEffect(() => {
-      if (data.length) {
-        filter(data);
-      }
-    }, [data, filter]);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className='bg-black py-10 px-4 '>
-      <div className='relative bottom-48'>
-      <MovieSlider data={filtredTop} className='relative group w-full h-60 rounded-lg overflow-hidden'/>
-      </div>
-      <div className='flex flex-col items-start space-y-10'>
-      <p className={`${bold.className}  text-white text-2xl font-bold mt-6 inline-block border-b-2 border-blue-400`}>Top picks</p>
-      <MovieSlider data={filtredPas} className='relative group w-full h-[512px] rounded-base overflow-hidden'/>
-      </div>
+    <div className="bg-gradient-to-r from-[#000000c0] to-[#1c1c1c] py-10 px-4 space-y-16">
+      {
+        loading ? (<Loader/>) : error ? (<p>Error: {error}</p> ):      
+         (
+          <>
+           <div className='-mt-52'>
+          <p className={`${bold.className}  relative  max-w-42 text-white text-2xl font-bold mb-4 border-b-2 border-blue-400`}>
+            Top Picks
+          </p>
+          <MovieSlider
+            data={filtredTop}
+            time={0}
+            className="relative group w-full h-60 rounded-lg overflow-hidden"
+            />
+        </div>
+        
+        <div>
+          <p className={`${bold.className}  max-w-42 text-white text-2xl font-bold mb-4 border-b-2 border-blue-400`}>
+            Other Picks
+          </p>
+          <MovieSlider
+            data={filtredPas}
+            time={300}
+            className="relative group w-full h-[512px] rounded-lg overflow-hidden"
+            />
+           </div>
+            </>
+        )
+      }
     </div>
-  )
-}
+     
+  );
+};
 
-export default MovieContents
+export default MovieContents;

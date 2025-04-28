@@ -1,9 +1,7 @@
 "use client"
 import localFont from "next/font/local"
 
-import { Search } from "lucide-react"
 import Link from 'next/link';
-import { Input } from "@/components/ui/input";
 import { HMenu, Selector } from "@/components/share";
 
 
@@ -15,6 +13,9 @@ const regular = localFont({
 })
 
 const Header = () => {
+
+ 
+   
 
   return (
     <nav className="bg-transparent px-4 py-3 w-full fixed top-0 left-0 z-50">

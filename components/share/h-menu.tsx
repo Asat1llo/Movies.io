@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/menubar"
 import { Button } from '../ui/button'
 import localFont from 'next/font/local'
-import { Input } from '../ui/input'
-import { Search } from 'lucide-react'
+import Searchmenu from './search'
+
 
 const regular = localFont({
   src:"../../public/fonts/Montserrat-Regular.woff2"
@@ -23,14 +23,7 @@ const HMenu = () => {
     <div>
         {/* Desktop Navigation */}
         <div className="hidden xl:flex justify-between items-center py-4 px-8 gap-1.5">
-        <div className="md:block relative">
-          <Input
-            type="text"
-            placeholder="Search.."
-            className="bg-[#1E2A47] text-[#8CA0B3] placeholder-[#8CA0B3] rounded-full pl-10 pr-4 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#5A7AD0] w-36 sm:w-48"
-          />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#8CA0B3] text-xs" />
-        </div>
+           <Searchmenu/>
           <div className="flex gap-6">
             <Button className={`${regular.className} text-[#5A7AD0] text-lg cursor-pointer hover:underline`}>
               Sign In

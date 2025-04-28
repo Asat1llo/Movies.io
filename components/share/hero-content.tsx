@@ -17,26 +17,25 @@ const bold = localFont({
 
 const HeroContent = () => {
  
-  const {newData} = useCountStore((state)=>state)
-  
+  const {newData} = useCountStore((state)=>state)  
+  const dataTime = newData.time?.toString().split('.').map((str: string) => Number(str.trim())) || [];
 
   return (
     <div className="relative z-10 max-w-7xl px-6 py-10 sm:py-16 md:py-20 lg:py-24 ">
         <div className="max-w-xl">
           <p className={`${robot.className} text-xs text-white/70 mb-1 leading-none`}>
-            {newData.genres || Default.geners}
+            {newData?.genres || Default.geners}
           </p>
           <h1 className={`${bold.className} text-white text-4xl font-extrabold mb-3 `}>
-            {newData.title || Default.title}
+            {newData?.title || Default.title}
           </h1>
 
           {/* Rating */}
           <div className="flex items-center space-x-2 mb-3">
             <div className="flex space-x-1 text-yellow-400 text-sm">
-              <Rating rating={newData.rating || Default.rating}/>
+              <Rating rating={newData?.rating || Default.rating}/>
             </div>
-            <span className="text-white/70 text-xs font-light">1</span>
-            <span className="text-white/70 text-xs font-light">1h 57m</span>
+            <span className="text-white/70 text-xs font-light">{dataTime[0] || Default.time[0]}h  {dataTime[1] || Default.time[1]}m</span>
           </div>
 
           <a href="#" className={`${bold.className}  text-lg text-blue-600 mb-2 inline-block`}>
@@ -44,7 +43,7 @@ const HeroContent = () => {
           </a>
 
           <p className={`${robot.className}  text-base font-light text-white/70 leading-tight max-w-md`}>
-            {newData.description || Default.description}
+            {newData?.description || Default.description}
           </p>
 
         </div>

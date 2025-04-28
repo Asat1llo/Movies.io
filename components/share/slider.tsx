@@ -1,47 +1,40 @@
 'use client';
 
-import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Mousewheel, FreeMode } from "swiper/modules";
-import "swiper/css";
+import React, { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Mousewheel, FreeMode } from 'swiper/modules';
+import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/mousewheel';
-import Link from "next/link";
-import { useCountStore } from "@/lib/store";
-import { MovieSliderProps } from "@/types/props";
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
+import Link from 'next/link';
+import { useCountStore } from '@/lib/store';
+import { MovieSliderProps } from '@/types/props';
 
-const MovieSlider = ({data,className}:MovieSliderProps) => {
-  const { fetchData, count,  newDailys } = useCountStore((state) => state);
+const MovieSlider = ({ data, time,className }: MovieSliderProps) => {
+  const { fetchData, count, newDailys } = useCountStore((state) => state);
 
-  const [activeButton,setActiveButton ]= useState<number | null>(null);
+  const [activeButton, setActiveButton] = useState<number | null>(null);
 
-   
+  // Count movie data once data is available.
   useEffect(() => {
     if (data?.length) {
       count(data);
     }
   }, [data, count]);
 
-  const handleClik = (index: number, id: string) => {
+  // Handle click on a movie item
+  const handleClick = (index: number, id: string) => {
     setActiveButton(index); 
     fetchData?.(id); 
   };
 
   return (
     <Swiper
-      modules={[Autoplay,Mousewheel,FreeMode]}
+      modules={[Autoplay, Mousewheel, FreeMode]}
       freeMode={true}
       mousewheel={{
         forceToAxis: true,
-        sensitivity:0.6
+        sensitivity: 0.7,
       }}
       spaceBetween={10}
       slidesPerView={1}
@@ -52,10 +45,11 @@ const MovieSlider = ({data,className}:MovieSliderProps) => {
         1024: { slidesPerView: 3 },
       }}
       autoplay={{
-        delay: 3000,
+        delay: time,
         disableOnInteraction: false,
       }}
       loop
+      loopAdditionalSlides={3}
       className="w-full"
     >
       {data?.map((movie, index) => {
@@ -63,19 +57,21 @@ const MovieSlider = ({data,className}:MovieSliderProps) => {
 
         return (
           <SwiperSlide
-            key={movie.id} 
-            {...(delay ? { "data-swiper-autoplay": delay } : {})}
+            key={movie.id}
+            {...(delay ? { 'data-swiper-autoplay': delay } : {})}
           >
-            < div
-              className={` ${className}`}
-              onClick={() => handleClik(index, movie.id)}
+            <div
+              className={`relative ${className}`}
+              onMouseEnter={() => handleClick(index, movie.id)}
             >
+              {/* Movie Poster */}
               <img
                 src={movie.poster_url}
                 alt={movie.title}
-                className="w-full h-full object-cover rounded-lg border-2 border-yellow-500 transition duration-300"
+                className="w-full h-full object-cover rounded-lg border-2 border-yellow-500 transition duration-300 ease-in-out"
               />
 
+              {/* Overlay when button is active */}
               {activeButton === index && (
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center space-x-4 transition-all duration-500 ease-in-out">
                   <Link href={`/movie/${movie.id}`}>
