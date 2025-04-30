@@ -1,8 +1,9 @@
+import { Button } from '@/components/ui/button'
 import { Default } from '@/lib/default'
 import { useCountStore } from '@/lib/store'
 import { Download, Facebook, Play, Twitter } from 'lucide-react'
 import React from 'react'
-import { Button } from '../ui/button'
+
 
 const InnerDetails = () => {
 
@@ -58,14 +59,14 @@ const InnerDetails = () => {
 
     {/* Share Buttons */}
     <div className="flex gap-4 mt-6">
-      <button className="flex items-center gap-2 bg-[#2A3B5A] px-5 py-2 rounded-lg text-[#9AA3B1] text-sm font-semibold hover:bg-[#3B4B6A] transition">
+      <Button className="flex items-center gap-2 bg-[#2A3B5A] px-5 py-2 rounded-lg text-[#9AA3B1] text-sm font-semibold hover:bg-[#3B4B6A] transition">
         <Twitter/>
         Share
-      </button>
-      <button className="flex items-center gap-2 bg-[#2A3B5A] px-5 py-2 rounded-lg text-[#9AA3B1] text-sm font-semibold hover:bg-[#3B4B6A] transition">
+      </Button>
+      <Button className="flex items-center gap-2 bg-[#2A3B5A] px-5 py-2 rounded-lg text-[#9AA3B1] text-sm font-semibold hover:bg-[#3B4B6A] transition">
         <Facebook />
         Like
-      </button>
+      </Button>
     </div>
   </section>
   )

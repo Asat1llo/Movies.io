@@ -11,7 +11,7 @@ import localFont from 'next/font/local'
 import {  useFetch } from '@/lib/store'
 
   const regular = localFont({
-    src:"../../public/fonts/Montserrat-Regular.woff2"
+    src:"../../../public/fonts/Montserrat-Regular.woff2"
   })
   
 

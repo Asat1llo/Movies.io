@@ -17,7 +17,7 @@ import Link from 'next/link';
 import localFont from 'next/font/local';
 
 const mot = localFont({
-  src: '../../public/fonts/Montserrat-Bold.woff2',
+  src: '../../../public/fonts/Montserrat-Bold.woff2',
 });
 
 export function DrawerDemo() {

@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useFetch } from '@/lib/store';
-import { Loader, MovieSlider } from '@/components/share';
+import { Loade, MovieSlider } from '@/components/share';
 import localFont from 'next/font/local';
 
 const bold = localFont({
@@ -19,7 +19,7 @@ const MovieContents = () => {
   if (loading) {
     return (
       <div className="bg-black flex items-center justify-center h-[60vh]">
-        <Loader />
+        <Loade />
       </div>
     );
   }

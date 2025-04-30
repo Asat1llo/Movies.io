@@ -2,7 +2,7 @@
 import React, { useEffect,use } from 'react';
 import { useCountStore } from '@/lib/store';
 import { InnerCard } from '@/components/share';
-import InnerDetails from '@/components/share/inner-details';
+import InnerDetails from '@/components/share/card/inner-details';
 
 const MovieCard = ({params}:{params:Promise<{id:string}>}) => {
 

@@ -2,18 +2,18 @@
 
 import React from "react";
 import localFont from "next/font/local";
-import Rating from "./rating";
 import { Default } from "@/lib/default";
 import { useCountStore } from "@/lib/store";
+import Rating from "../slider/rating";
 
 // Fontlar
 const robotoRegular = localFont({
-  src: "../../public/fonts/Roboto-Regular.woff2",
+  src: "../../../public/fonts/Roboto-Regular.woff2",
   display: "swap",
 });
 
 const robotoBold = localFont({
-  src: "../../public/fonts/Roboto-Bold.woff2",
+  src: "../../../public/fonts/Roboto-Bold.woff2",
   display: "swap",
 });
 

@@ -1,9 +1,8 @@
-// components/Loader.tsx
 "use client";
 
 import React from "react";
 
-const Loader = () => {
+const Loade = () => {
   return (
     <div className="relative inline-block mt-10 text-white text-5xl tracking-wider font-sans">
       <span className="loader-text">Load&nbsp;ng</span>
@@ -13,4 +12,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default Loade;

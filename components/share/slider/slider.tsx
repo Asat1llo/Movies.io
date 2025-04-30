@@ -9,7 +9,7 @@ import 'swiper/css/mousewheel';
 import Link from 'next/link';
 import { useCountStore } from '@/lib/store';
 import { MovieSliderProps } from '@/types/props';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 
 const MovieSlider = ({ data, time,scroll,className }: MovieSliderProps) => {
   const { fetchData, count, newDailys } = useCountStore((state) => state);

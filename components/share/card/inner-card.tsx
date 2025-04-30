@@ -6,11 +6,12 @@ import {
     CardContent,
     CardFooter,
 } from "@/components/ui/card"
-import { Button } from '../ui/button'
 import { Bookmark, Eye, Play, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useCountStore } from '@/lib/store'
 import { Default } from '@/lib/default'
+import { Button } from '@/components/ui/button'
+import { addToFavorites } from '@/lib/utils'
 
 const Innercard = () => {
 
@@ -33,7 +34,7 @@ const Innercard = () => {
       </CardContent>
 
       <CardFooter className="flex flex-col gap-6 w-full pt-6">
-        <Button className="w-full bg-white text-[#2A3B5A] py-5 text-base font-semibold hover:bg-gray-100 transition">
+        <Button onClick={()=>addToFavorites(newData.id)} className="w-full bg-white text-[#2A3B5A] py-5 text-base font-semibold hover:bg-gray-100 transition">
           <Play className="text-[#2A3B5A] w-5 h-5" />
           Trailer
         </Button>

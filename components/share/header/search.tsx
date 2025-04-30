@@ -1,5 +1,5 @@
+import { Input } from '@/components/ui/input'
 import { useCountStore } from '@/lib/store'
-import { Input } from '../ui/input'
 import { Search } from 'lucide-react'
 import { useEffect, useState } from 'react'
 

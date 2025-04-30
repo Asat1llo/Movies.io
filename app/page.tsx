@@ -1,5 +1,5 @@
 import Hero from "./hero";
-import MovieContents from "./movie/movieContents";
+import MovieContents from "./movie/contents";
 
 export default function Home() {
   

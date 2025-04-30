@@ -1,10 +1,12 @@
 import React from 'react'
 import { Star } from 'lucide-react'
-import { Props } from '@/types/props'
 
 
+interface rating{
+  rating:number
+}
 
-const Rating  =({rating}:Props) => {
+const Rating  =({rating}:rating) => {
   const fullStars = Math.round(rating);
   return (
     <>

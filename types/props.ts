@@ -1,9 +1,5 @@
 
-export type Props = {
-    rating: number;
-  };
-  
-  export interface Movie {
+    export interface Movie {
     id: string;
     title: string;
     rating: number;
@@ -53,3 +49,6 @@ export interface State {
     fetchData: (id: string) =>void;
     filter:(val:string)=>void
   }
+
+
+
