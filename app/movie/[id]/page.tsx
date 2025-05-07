@@ -5,24 +5,15 @@ import { InnerCard } from '@/components/share';
 import InnerDetails from '@/components/share/card/inner-details';
 
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
 
 
-const MovieCard = async({ params }: { params: Promise<{ id: string }> }) => {
+const MovieCard = ({params}: {params: {id: string}}) => {
 
-  const resolvedParams = await params; 
   const { fetchData } = useCountStore((state) => state);
 
-  
-
   useEffect(() => {
-    if (resolvedParams?.id) fetchData(resolvedParams.id);
-  }, [resolvedParams?.id]);
-
+    if (params?.id) fetchData(params.id);
+  }, [params?.id]);
 
   return (
     <div className="bg-[#1B2A44] text-white min-h-screen flex items-center justify-center py-20 px-6">
