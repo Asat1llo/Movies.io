@@ -12,16 +12,16 @@ interface PageProps {
 }
 
 
-const MovieCard = ({params}:PageProps) => {
+const MovieCard = async({ params }: { params: Promise<{ id: string }> }) => {
 
-  const {fetchData} = useCountStore((state)=>state)
+  const resolvedParams = await params; 
+  const { fetchData } = useCountStore((state) => state);
+
   
 
   useEffect(() => {
-    if (params.id) {
-      fetchData(params.id);
-    }
-  }, [params.id, fetchData]);
+    if (resolvedParams?.id) fetchData(resolvedParams.id);
+  }, [resolvedParams?.id]);
 
 
   return (
