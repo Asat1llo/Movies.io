@@ -88,8 +88,12 @@ export const useCountStore = create<State>((set) => ({
       throwErrorIfAny(error, 'Failed to fetch movie by ID');
 
       if (data) set({ newData: data });
-    } catch (err: any) {
-      set({ error: err.message });
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        set({ error: err.message });
+      } else {
+        set({ error: 'Unknown error occurred' });
+      }
     } finally {
       set({ loading: false });
     }

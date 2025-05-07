@@ -19,7 +19,7 @@ const SearchMenu = ({set}:Props) => {
   
   useEffect(() => {
     filter(value || "");
-  }, [value]);
+  }, [value,filter]);
   
 
   return (
