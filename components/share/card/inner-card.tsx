@@ -11,7 +11,7 @@ import Image from 'next/image'
 import { useCountStore } from '@/lib/store'
 import { Default } from '@/lib/default'
 import { Button } from '@/components/ui/button'
-import { addToFavorites } from '@/lib/utils'
+
 
 const Innercard = () => {
 
