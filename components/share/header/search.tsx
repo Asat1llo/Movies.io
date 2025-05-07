@@ -3,7 +3,12 @@ import { useCountStore } from '@/lib/store'
 import { Search } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-const SearchMenu = ({set}:any) => {
+interface Props{
+  set:(value:boolean)=>void
+}
+
+
+const SearchMenu = ({set}:Props) => {
 
   const {filter} = useCountStore((state)=>state)
   const [value, setValue] = useState("")

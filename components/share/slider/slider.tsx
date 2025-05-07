@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useCountStore } from '@/lib/store';
 import { MovieSliderProps } from '@/types/props';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 const MovieSlider = ({ data, time,scroll,className }: MovieSliderProps) => {
   const { fetchData, count, newDailys } = useCountStore((state) => state);
@@ -72,9 +73,11 @@ const MovieSlider = ({ data, time,scroll,className }: MovieSliderProps) => {
               onMouseLeave={()=>handleClick(null)}
             >
               {/* Movie Poster */}
-              <img
+              <Image
                 src={movie.poster_url}
                 alt={movie.title}
+                width={300} 
+                height={450}
                 className="w-full h-full object-cover rounded-lg border-2 border-yellow-500 transition duration-300 ease-in-out"
               />
 

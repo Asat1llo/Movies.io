@@ -2,10 +2,19 @@ import { create } from 'zustand';
 import { supabase } from './supabaseClient';
 import { Fetch, State } from '@/types/props';
 
+
+
 // Helper function for error throwing
-const throwErrorIfAny = (error: any, message = "Unknown error") => {
-  if (error) throw new Error(error.message || message);
+const throwErrorIfAny = (error: string | number | undefined | unknown, message = "Unknown error") => {
+  if (error) {
+    if (typeof error === 'object' && error !== null && 'message' in error) {
+      throw new Error((error as { message: string }).message);
+    } else {
+      throw new Error(String(error) || message);
+    }
+  }
 };
+
 
 // ========== useFetch Store ==========
 export const useFetch = create<Fetch>((set) => ({

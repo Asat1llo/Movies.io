@@ -8,9 +8,6 @@ import { HMenu, Selector } from "@/components/share";
 const bold = localFont({
     src:"../public/fonts/Montserrat-Bold.woff2"
 })
-const regular = localFont({
-  src:"../public/fonts/Montserrat-Regular.woff2"
-})
 
 const Header = () => {
 
