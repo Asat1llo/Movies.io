@@ -46,9 +46,14 @@ export const useFetch = create<Fetch>((set) => ({
       }
 
       set({ data, filtredPas, filtredTop });
-    } catch (err: any) {
-      set({ error: err.message });
-    } finally {
+    }catch (err: unknown) {
+      if (err instanceof Error) {
+        set({ error: err.message });
+      } else {
+        set({ error: 'Unknown error occurred' });
+      }
+    }
+    finally {
       set({ loading: false });
     }
   }
