@@ -5,15 +5,21 @@ import { InnerCard } from '@/components/share';
 import InnerDetails from '@/components/share/card/inner-details';
 
 
+interface Props{
+  params:{id:string}
+}
 
 
-const MovieCard = ({params}: {params: {id: string}}) => {
+
+const Page = ({params}:Props) => {
+
+  const{id}= params
 
   const { fetchData } = useCountStore((state) => state);
 
   useEffect(() => {
-    if (params?.id) fetchData(params.id);
-  }, [params?.id]);
+    fetchData(id)
+  }, [id]);
 
   return (
     <div className="bg-[#1B2A44] text-white min-h-screen flex items-center justify-center py-20 px-6">
@@ -26,4 +32,4 @@ const MovieCard = ({params}: {params: {id: string}}) => {
   );
 };
 
-export default MovieCard;
+export default Page;
