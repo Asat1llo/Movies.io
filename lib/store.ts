@@ -109,8 +109,12 @@ export const useCountStore = create<State>((set) => ({
         : data;
 
       set({ filterData: filteredData || [] });
-    } catch (err: any) {
-      set({ error: err.message });
+    }  catch (err: unknown) {
+      if (err instanceof Error) {
+        set({ error: err.message });
+      } else {
+        set({ error: 'Unknown error occurred' });
+      }
     } finally {
       set({ loading: false });
     }
