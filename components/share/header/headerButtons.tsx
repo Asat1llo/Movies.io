@@ -26,18 +26,14 @@ const HeaderButtons = () => {
       </Button>
     ):(
       <>
-      <Link href='/login'>
       <Button className={`${regular.className} text-[#5A7AD0] text-lg cursor-pointer hover:underline`}>
       Sign In
     </Button>
-      </Link>
-    <Link href="/login">
     <Button
       className={`${regular.className} bg-[#3B6CF0] text-white text-lg font-semibold rounded-[10px] px-7 py-4 cursor-pointer hover:bg-[#2E54D4] transition`}
       >
       Sign Up
     </Button>
-      </Link>
         </>
     )
       }
