@@ -1,30 +1,38 @@
 'use client';
 import React, { useEffect} from 'react';
 import { useCountStore } from '@/lib/store';
-import { InnerCard } from '@/components/share';
-import InnerDetails from '@/components/share/card/inner-details';
+import { InnerCard, InnerDetailes } from '@/components/share';
+import { useParams } from 'next/navigation';
 
 
 
 
 
-const  Page =({params})=>{
+export default function Page(){
 
-  console.log(params.id)
+
+    const params = useParams();
+    const movieid = params.movieid as string;
+
+
+   console.log(movieid)
+  
   const { fetchData } = useCountStore((state) => state);
   useEffect(() => {
-    fetchData(params.id)
-  }, [params.id]);
+    if(fetchData){
+      fetchData(movieid)
+    }
+  }, [fetchData,movieid]);
 
   return (
     <div className="bg-[#1B2A44] text-white min-h-screen flex items-center justify-center py-20 px-6">
     <main className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-3 gap-12">
        <InnerCard/>
-       <InnerDetails/>  
+       <InnerDetailes/>  
     </main>
   </div>
   
   );
 };
 
-export default Page;
+
