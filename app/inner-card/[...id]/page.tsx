@@ -7,16 +7,14 @@ import InnerDetails from '@/components/share/card/inner-details';
 
 
 
-export type ParamsType = Promise<{id:string}>;
 
-async function Page(props:{params:ParamsType}){
+const  Page =({params})=>{
 
-  const {id }= await props.params;
+  console.log(params.id)
   const { fetchData } = useCountStore((state) => state);
-
   useEffect(() => {
-    fetchData(id)
-  }, [id]);
+    fetchData(params.id)
+  }, [params.id]);
 
   return (
     <div className="bg-[#1B2A44] text-white min-h-screen flex items-center justify-center py-20 px-6">

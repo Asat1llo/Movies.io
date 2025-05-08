@@ -17,7 +17,7 @@ const Innercard = () => {
 
   const {newData} = useCountStore((state)=>state)
   
-  console.log(newData.generss)
+  console.log(newData)
 
   return ( 
     <Card className="border-none flex flex-col items-center shadow-xl rounded-2xl p-4 w-full max-w-sm bg-[#1B2A44]">
