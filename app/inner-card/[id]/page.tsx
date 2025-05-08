@@ -7,9 +7,11 @@ import InnerDetails from '@/components/share/card/inner-details';
 
 
 
-function Page({id}:{id:string}){
+export type ParamsType = Promise<{id:string}>;
 
+async function Page(props:{params:ParamsType}){
 
+  const {id }= await props.params;
   const { fetchData } = useCountStore((state) => state);
 
   useEffect(() => {
