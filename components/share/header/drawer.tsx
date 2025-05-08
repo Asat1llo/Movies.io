@@ -44,7 +44,7 @@ export function DrawerDemo() {
             filterData.map((item) => (
               <Link
                 key={item.id}
-                href={`/movie/${item.id}`}
+                href={`/inner-card/${item.id}`}
                 onClick={handleClose}
                 className="w-72"
               >

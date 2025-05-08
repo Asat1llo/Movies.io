@@ -84,7 +84,7 @@ const MovieSlider = ({ data, time,scroll,className }: MovieSliderProps) => {
               {/* Overlay when button is active */}
               {activeButton === index && (
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center space-x-4 transition-all duration-500 ease-in-out">
-                  <Link href={`/movie/${movie.id}`}>
+                  <Link href={`/inner-card/${movie.id}`}>
                     <Button className="px-4 py-2 bg-yellow-500 text-black text-sm rounded-md font-semibold hover:bg-yellow-600 transition duration-300 cursor-pointer">
                       ▶ Watch
                     </Button>
