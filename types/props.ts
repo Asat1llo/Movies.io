@@ -40,6 +40,7 @@ export interface NewData {
 export interface State {
     newDailys: number[];
     newData: NewData[];
+    backgroundImage:string;
     sort:NewData[];
     filterData:NewData[];
     addId: string;

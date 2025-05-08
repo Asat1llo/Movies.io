@@ -5,9 +5,11 @@ import { Default } from '@/lib/default';
 import { useCountStore } from '@/lib/store';
 
 export default function Hero() {
-  const { newData } = useCountStore((state) => state);
+  const { backgroundImage } = useCountStore((state) => state);
 
-  const backgroundImage = (newData.poster_url || Default.poster_url) as string;
+
+
+  
 
   return (
     <section
