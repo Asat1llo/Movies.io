@@ -1,29 +1,16 @@
-"use client"
+'use client';
+import React, { use, useEffect} from 'react';
 import { useCountStore } from '@/lib/store';
 import { InnerCard, InnerDetailes } from '@/components/share';
-import { useEffect } from 'react';
-import { useParams } from 'next/navigation';
 
 
+const  Page =({params}:{params:Promise<{movieid:string}>})=>{
 
-
-
-export default function Page(){
-
-
-    const {movieid} = useParams()
-
-
-   console.log(movieid)
-  
+  const {movieid} = use(params)
   const { fetchData } = useCountStore((state) => state);
- 
-  useEffect(()=>{
-    if(movieid){
-      fetchData(movieid)
-    }
-  },[fetchData,movieid])
-
+  useEffect(() => {
+    fetchData(movieid)
+  }, [movieid]);
 
   return (
     <div className="bg-[#1B2A44] text-white min-h-screen flex items-center justify-center py-20 px-6">
@@ -36,4 +23,4 @@ export default function Page(){
   );
 };
 
-
+export default Page;
