@@ -5,15 +5,10 @@ import { InnerCard } from '@/components/share';
 import InnerDetails from '@/components/share/card/inner-details';
 
 
-interface Props{
-  params:{id:string}
-}
 
 
+function Page({id}:{id:string}){
 
-const Page = ({params}:Props) => {
-
-  const{id}= params
 
   const { fetchData } = useCountStore((state) => state);
 
