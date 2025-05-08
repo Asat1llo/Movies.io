@@ -1,7 +1,6 @@
 'use client';
 
 import { User, Lock } from 'lucide-react';
-import { useState } from 'react';
 
 const  LoginCard=()=> {
  
