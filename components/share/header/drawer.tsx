@@ -15,6 +15,7 @@ import SearchMenu from './search';
 import Image from 'next/image';
 import Link from 'next/link';
 import localFont from 'next/font/local';
+import { NewData } from '@/types/props';
 
 const mot = localFont({
   src: '../../../public/fonts/Montserrat-Bold.woff2',
@@ -41,7 +42,7 @@ export function DrawerDemo() {
 
         <div className="w-full flex flex-wrap justify-center px-2 gap-5 pb-10 z-50">
           {filterData?.length > 0 ? (
-            filterData.map((movie) => (
+            filterData.map((movie:NewData) => (
               <Link
                 key={movie.id}
                 href={`/movie/${movie?.id}`}
@@ -52,8 +53,8 @@ export function DrawerDemo() {
                   <CardContent className="p-0">
                     <div className="relative w-full h-80 overflow-hidden">
                       <Image
-                        src={movie.poster_url}
-                        alt={movie.title}
+                        src={movie?.poster_url}
+                        alt={movie?.title}
                         fill
                         className="object-cover rounded-t-2xl group-hover:scale-110 transition-transform duration-500 ease-in-out"
                       />

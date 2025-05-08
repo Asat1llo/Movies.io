@@ -45,7 +45,7 @@ const InnerDetails = () => {
       </div>
       <div>
         <dt className="text-[#2A3B5A] mb-1">Genres</dt>
-        <dd className="font-semibold italic">{newData?.genres || Default.geners}</dd>
+        <dd className="font-semibold italic">{newData?.geners || Default.geners}</dd>
       </div>
       <div>
         <dt className="text-[#2A3B5A] mb-1">Countries</dt>

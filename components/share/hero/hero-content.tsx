@@ -24,7 +24,7 @@ const HeroContent = () => {
     newData?.time?.toString().split(".").map((str: string) => Number(str.trim())) || [];
 
   const title = newData?.title || Default.title;
-  const genres = newData?.genres || Default.geners;
+  const genres = newData?.geners || Default.geners;
   const rating = newData?.rating || Default.rating;
   const description = newData?.description || Default.description;
 

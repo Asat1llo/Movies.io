@@ -1,16 +1,10 @@
 'use client';
 
 import { HeroContent } from '@/components/share';
-import { Default } from '@/lib/default';
 import { useCountStore } from '@/lib/store';
 
 export default function Hero() {
   const { backgroundImage } = useCountStore((state) => state);
-
-
-
-  
-
   return (
     <section
       className="relative flex items-center justify-center min-h-screen bg-cover bg-center transition-all duration-1000 ease-in-out"

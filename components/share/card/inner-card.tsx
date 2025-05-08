@@ -13,16 +13,20 @@ import { Default } from '@/lib/default'
 import { Button } from '@/components/ui/button'
 
 
-const Innercard = () => {
 
+const Innercard = () => {
+  
+
+  
   const {newData} = useCountStore((state)=>state)
   
+
 
   return ( 
     <Card className="border-none flex flex-col items-center shadow-xl rounded-2xl p-4 w-full max-w-sm bg-[#1B2A44]">
      <CardContent className="relative w-full aspect-[3/4]">
   <Image 
-    src={newData?.poster_url || Default.poster_url}
+    src={newData?.poster_url || Default.poster_url} 
     alt={newData?.title || Default.title}
     fill
     layout=''
@@ -33,7 +37,7 @@ const Innercard = () => {
       </CardContent>
 
       <CardFooter className="flex flex-col gap-6 w-full pt-6">
-        <Button onClick={()=>addToFavorites(newData.id)} className="w-full bg-white text-[#2A3B5A] py-5 text-base font-semibold hover:bg-gray-100 transition">
+        <Button  className="w-full bg-white text-[#2A3B5A] py-5 text-base font-semibold hover:bg-gray-100 transition">
           <Play className="text-[#2A3B5A] w-5 h-5" />
           Trailer
         </Button>

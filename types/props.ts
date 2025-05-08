@@ -26,20 +26,30 @@
     scroll:boolean;
   }
   
-export interface NewData {
-    title:string
+export type NewData ={
     id:string,
+    title:string,
     poster_url:string,
     description:string,
     year:number,
     rating:number,
-    geners:string;
+    geners:string,
+    time:number
 }  
 
 
 export interface State {
     newDailys: number[];
-    newData: NewData[];
+    newData: {
+      id?:string | undefined,
+      title?:string | undefined;
+      poster_url?:string | undefined;
+      description?:string | undefined ;
+      year?:number | undefined;
+      rating?:number | undefined;
+      geners?:string | undefined;
+      time?:number | undefined;
+    };
     backgroundImage:string;
     sort:NewData[];
     filterData:NewData[];

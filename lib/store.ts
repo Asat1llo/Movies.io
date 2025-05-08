@@ -89,7 +89,7 @@ export const useCountStore = create<State>((set) => ({
       const { data, error } = await supabase.from("movie").select("*").eq("id", id).single();
       throwErrorIfAny(error, 'Failed to fetch movie by ID');
 
-      if (data) {set({ newData: data}), set({backgroundImage:data.poster_url})};
+      if (data) set({ newData: data,backgroundImage:data.poster_url});
     } catch (err: unknown) {
       if (err instanceof Error) {
         set({ error: err.message });
