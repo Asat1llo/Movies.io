@@ -41,10 +41,10 @@ export function DrawerDemo() {
 
         <div className="w-full flex flex-wrap justify-center px-2 gap-5 pb-10 z-50">
           {filterData?.length > 0 ? (
-            filterData.map((item) => (
+            filterData.map((movie) => (
               <Link
-                key={item.id}
-                href={`/movie/${item.id}`}
+                key={movie.id}
+                href={`/movie/${movie?.id}`}
                 onClick={handleClose}
                 className="w-72"
               >
@@ -52,8 +52,8 @@ export function DrawerDemo() {
                   <CardContent className="p-0">
                     <div className="relative w-full h-80 overflow-hidden">
                       <Image
-                        src={item.poster_url}
-                        alt={item.title}
+                        src={movie.poster_url}
+                        alt={movie.title}
                         fill
                         className="object-cover rounded-t-2xl group-hover:scale-110 transition-transform duration-500 ease-in-out"
                       />
@@ -62,7 +62,7 @@ export function DrawerDemo() {
                   </CardContent>
                   <CardFooter className="flex justify-center p-4">
                     <p className={`${mot.className} font-extrabold text-xl text-gray-800 text-center group-hover:text-yellow-600 transition-colors duration-500`}>
-                      {item.title}
+                      {movie.title}
                     </p>
                   </CardFooter>
                 </Card>

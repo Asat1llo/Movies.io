@@ -32,7 +32,6 @@ const MovieContents = () => {
     );
   }
 
-  console.log(filtredPas)
 
   return (
     <div className="bg-gradient-to-r from-[#000000c0] to-[#1c1c1c] py-10 px-4 space-y-20">
