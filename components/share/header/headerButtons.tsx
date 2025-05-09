@@ -1,6 +1,4 @@
-// import { useRouter } from 'next/navigation';
 import React from 'react'
-import Link from 'next/link';
 import localFont from 'next/font/local';
 import { Button } from '@/components/ui/button';
 
