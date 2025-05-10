@@ -50,7 +50,6 @@ export interface State {
       geners?:string | undefined;
       time?:number | undefined;
     };
-    backgroundImage:string;
     sort:NewData[];
     filterData:NewData[];
     addId: string;

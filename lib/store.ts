@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { supabase } from './supabaseClient';
 import { Fetch, State } from '@/types/props';
-import { Default } from './default';
 
 
 
@@ -70,7 +69,6 @@ export const useFetch = create<Fetch>((set) => ({
 export const useCountStore = create<State>((set) => ({
   newDailys: [],
   newData: [],
-  backgroundImage:Default.poster_url,
   sort: [],
   addId: '',
   filterData: [],
@@ -89,7 +87,7 @@ export const useCountStore = create<State>((set) => ({
       const { data, error } = await supabase.from("movie").select("*").eq("id", id).single();
       throwErrorIfAny(error, 'Failed to fetch movie by ID');
 
-      if (data) set({ newData: data,backgroundImage:data.poster_url});
+      if (data) set({ newData: data});
     } catch (err: unknown) {
       if (err instanceof Error) {
         set({ error: err.message });
