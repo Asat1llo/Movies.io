@@ -1,40 +1,26 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import Header from "./header";
 import "./globals.css";
-import { Loade } from "@/components/share";
+import { Metadata } from "next";
+import Header from "./header";
+import AppWrapper from "@/components/share/slider/loadingPage";
+
+export const metadata: Metadata = {
+  icons: "/icon.svg",
+  title: "MOVIE.IO",
+  description: "free movies and films,anime",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); 
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <html lang="en">
-        <body className="flex items-center justify-center h-screen bg-black">
-          <Loade/>
-        </body>
-      </html>
-    );
-  }
-
+}) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <AppWrapper>
+          <Header />
+          {children}
+        </AppWrapper>
       </body>
     </html>
   );
