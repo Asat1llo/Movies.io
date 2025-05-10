@@ -2,14 +2,15 @@
 import { HeroContent } from '@/components/share';
 import { Default } from '@/lib/default';
 import { useCountStore } from '@/lib/store';
+import { relative } from 'path';
 
 export default function Hero() {
   const {newData } = useCountStore((state) => state);
   const backgroundImage =  (newData.poster_url || Default.poster_url) as string;
   return (
     <section
-      className="relative flex items-center justify-center min-h-screen bg-cover bg-center transition-all duration-1000 ease-in-out"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="relative flex items-center justify-center min-h-screen bg-cover bg-center"
+      style={{backgroundImage: `url(${backgroundImage})`,transition:'transform 1.5s ease-in-out' }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/60 z-0" />
