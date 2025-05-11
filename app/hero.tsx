@@ -2,7 +2,6 @@
 import { HeroContent } from '@/components/share';
 import { Default } from '@/lib/default';
 import { useCountStore } from '@/lib/store';
-import { relative } from 'path';
 
 export default function Hero() {
   const {newData } = useCountStore((state) => state);
