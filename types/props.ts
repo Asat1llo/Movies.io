@@ -33,7 +33,7 @@ export type NewData ={
     description:string,
     year:number,
     rating:number,
-    geners:string,
+    genres:string,
     time:number
 }  
 
@@ -47,7 +47,7 @@ export interface State {
       description?:string | undefined ;
       year?:number | undefined;
       rating?:number | undefined;
-      geners?:string | undefined;
+      genres?:string | undefined;
       time?:number | undefined;
     };
     sort:NewData[];

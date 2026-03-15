@@ -1,20 +1,6 @@
 import { create } from 'zustand';
-import { supabase } from './supabaseClient';
-import { Fetch, State } from '@/types/props';
-
-
-
-// Helper function for error throwing
-const throwErrorIfAny = (error: string | number | undefined | unknown, message = "Unknown error") => {
-  if (error) {
-    if (typeof error === 'object' && error !== null && 'message' in error) {
-      throw new Error((error as { message: string }).message);
-    } else {
-      throw new Error(String(error) || message);
-    }
-  }
-};
-
+import { Fetch, State, Movie } from '@/types/props';
+import { localMovies } from './data';
 
 // ========== useFetch Store ==========
 export const useFetch = create<Fetch>((set) => ({
@@ -28,47 +14,37 @@ export const useFetch = create<Fetch>((set) => ({
     set({ loading: true, error: null });
 
     try {
-      const { data, error } = await supabase.from('movie').select('*');
-      throwErrorIfAny(error, 'Failed to fetch movies');
-
-      if (!data) throw new Error('No data received.');
+      const data = localMovies;
 
       let filtredPas = data.filter((item) => item.rating < 7);
       let filtredTop = data.filter((item) => item.rating >= 7);
 
       if (genre && genre !== 'All') {
         const filteredData = data.filter((item) =>
-          item.genres?.split(',').map((g: string) => g.trim()).includes(genre)
+          item.genres ? item.genres.split(',').map((g: string) => g.trim()).includes(genre) : false
         );
         
         filtredPas = filteredData.filter((item) => item.rating < 7);
         filtredTop = filteredData.filter((item) => item.rating >= 7);
       }
 
-      set({ data, filtredPas, filtredTop });
-    }catch (err: unknown) {
+      set({ data: data as unknown as Movie[], filtredPas: filtredPas as unknown as Movie[], filtredTop: filtredTop as unknown as Movie[] });
+    } catch (err: unknown) {
       if (err instanceof Error) {
         set({ error: err.message });
       } else {
         set({ error: 'Unknown error occurred' });
       }
-    }
-    finally {
+    } finally {
       set({ loading: false });
     }
   }
 }));
 
-
-
-
-
-
-
 // ========== useCountStore ==========
 export const useCountStore = create<State>((set) => ({
   newDailys: [],
-  newData: [],
+  newData: {},
   sort: [],
   addId: '',
   filterData: [],
@@ -84,10 +60,10 @@ export const useCountStore = create<State>((set) => ({
     set({ loading: true, error: null });
 
     try {
-      const { data, error } = await supabase.from("movie").select("*").eq("id", id).single();
-      throwErrorIfAny(error, 'Failed to fetch movie by ID');
+      const data = localMovies.find(m => String(m.id) === String(id));
+      if (!data) throw new Error('Movie not found');
 
-      if (data) set({ newData: data});
+      set({ newData: data });
     } catch (err: unknown) {
       if (err instanceof Error) {
         set({ error: err.message });
@@ -103,17 +79,15 @@ export const useCountStore = create<State>((set) => ({
     set({ loading: true, error: null });
 
     try {
-      const { data, error } = await supabase.from("movie").select("*");
-      throwErrorIfAny(error, 'Failed to fetch movies for filtering');
-
+      const data = localMovies;
       const searchValue = value?.trim().toLowerCase();
 
       const filteredData = searchValue
-        ? data?.filter((item) => item.title.toLowerCase().includes(searchValue))
+        ? data.filter((item) => item.title.toLowerCase().includes(searchValue))
         : data;
 
       set({ filterData: filteredData || [] });
-    }  catch (err: unknown) {
+    } catch (err: unknown) {
       if (err instanceof Error) {
         set({ error: err.message });
       } else {

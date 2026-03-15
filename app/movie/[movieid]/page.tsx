@@ -10,7 +10,7 @@ const  Page =({params}:{params:Promise<{movieid:string}>})=>{
   const { fetchData } = useCountStore((state) => state);
   useEffect(() => {
     fetchData(movieid)
-  }, [movieid]);
+  }, [movieid, fetchData]);
 
   return (
     <div className="bg-[#1B2A44] text-white min-h-screen flex items-center justify-center py-20 px-6">

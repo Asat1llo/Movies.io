@@ -73,27 +73,29 @@ const MovieSlider = ({ data, time,scroll,className }: MovieSliderProps) => {
               onMouseLeave={()=>handleClick(null)}
             >
               {/* Movie Poster */}
-              <Image
-                src={movie.poster_url}
-                alt={movie.title}
-                width={300} 
-                height={450}
-                className="w-full h-full object-cover rounded-lg border-2 border-yellow-500 transition duration-300 ease-in-out"
-              />
+              <div className="relative group/poster w-full h-full rounded-xl overflow-hidden shadow-lg ring-1 ring-white/10 hover:ring-2 hover:ring-blue-500 hover:shadow-blue-500/20 transition-all duration-300">
+                <Image
+                  src={movie.poster_url}
+                  alt={movie.title}
+                  width={300} 
+                  height={450}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/poster:scale-105"
+                />
 
-              {/* Overlay when button is active */}
-              {activeButton === index && (
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center space-x-4 transition-all duration-500 ease-in-out">
-                  <Link  href={`/movie/${movie?.id}`}>
-                    <Button  className="px-4 py-2 bg-yellow-500 text-black text-sm rounded-md font-semibold hover:bg-yellow-600 transition duration-300 cursor-pointer">
-                      ▶ Watch
+                {/* Overlay when button is active */}
+                {activeButton === index && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10 backdrop-blur-[2px] flex flex-col items-center justify-center space-y-3 transition-opacity duration-300 opacity-100">
+                    <Link href={`/movie/${movie?.id}`}>
+                      <Button className="w-36 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm rounded-lg font-bold shadow-lg shadow-blue-600/30 transition-all hover:scale-105">
+                        ▶ Watch Trailer
+                      </Button>
+                    </Link>
+                    <Button className="w-36 py-2.5 bg-white/20 hover:bg-white/30 text-white text-sm rounded-lg font-semibold backdrop-blur-md border border-white/10 transition-all hover:scale-105">
+                      + Add to List
                     </Button>
-                  </Link>
-                  <Button className="px-4 py-2 bg-white/20 backdrop-blur text-white text-sm rounded-md font-semibold hover:bg-white/30 transition duration-300 cursor-pointer">
-                    ❤️ Add to Favorites
-                  </Button>
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
             </div>
           </SwiperSlide>
         );
